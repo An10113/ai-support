@@ -1,7 +1,13 @@
-const RootPage = () => {
-    <div>
-        Hello 
-    </div>
-}
+import { UserButton } from "@clerk/nextjs";
 
-export default RootPage
+const RootPage = () => {
+    return ( 
+    <>Hello
+    <UserButton />
+    
+    </> 
+    );
+}
+ 
+export default RootPage;
+
