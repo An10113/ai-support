@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
+import MoblieSideBar from "./moblie-sidebar";
 
 const font = Poppins({
     weight: "600",
@@ -23,7 +24,7 @@ export const NavBar = () => {
     "
     >
       <div className="flex items-center">
-        <Menu className="block md:hidden" />
+        <MoblieSideBar />
         <Link href="/">
         <h1 className={cn("hidden md:block text-xl md:text-3xl font-bold text-primary", font.className)}>
           Companion.AI
