@@ -14,7 +14,7 @@ const SearchInput = () => {
     const categoryId = searchParams.get("categoryID")
     const name = searchParams.get("name")
 
-    const [value, setValue] = useState<String>(name || "")
+    const [value, setValue] = useState(name || "")
     const debounceValue = useDebounce<String>(value, 500)
     const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value)
@@ -37,9 +37,10 @@ const SearchInput = () => {
         <div className="relative">
             <SearchIcon className="absolute h-4 w-4 top-3 left-4 text-muted-foreground"/>
             <Input
+            onChange={onChange}
+            value={value}
             placeholder="Search..." 
             className="pl-10 bg-primary/10"/>
-
         </div>
      );
 }
