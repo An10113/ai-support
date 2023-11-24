@@ -11,7 +11,7 @@ const SearchInput = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     
-    const categoryId = searchParams.get("categoryID")
+    const categoryId = searchParams.get("categoryId")
     const name = searchParams.get("name")
 
     const [value, setValue] = useState(name || "")
@@ -23,7 +23,7 @@ const SearchInput = () => {
     useEffect(() => {
         const query = { 
           name: debounceValue, 
-          categoryId: categoryId ,
+          categoryId: categoryId,
         };
     
         const url = qs.stringifyUrl({
