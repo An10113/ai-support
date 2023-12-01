@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { Category } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import qs from "query-string";
 
 interface CategoryProps {

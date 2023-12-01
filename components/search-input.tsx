@@ -15,7 +15,7 @@ const SearchInput = () => {
     const name = searchParams.get("name")
 
     const [value, setValue] = useState(name || "")
-    const debounceValue = useDebounce<String>(value, 500)
+    const debounceValue = useDebounce(value, 500)
     const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         setValue(e.target.value)
     }
