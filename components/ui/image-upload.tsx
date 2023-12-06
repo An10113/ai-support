@@ -22,8 +22,9 @@ export const ImageUpload = ({value, onChange, disabled}: ImageUploadProps) => {
     }
 
     return (
-        <div className="space-y-4 w-full flex flex-col">
+        <div className="space-y-4 w-full flex flex-col justify-center items-center">
             <CldUploadButton
+            onUpload={(result:any) => onChange(result.info.secure_url)}
             options={{
                 maxFiles: 1
             }}
@@ -35,9 +36,9 @@ export const ImageUpload = ({value, onChange, disabled}: ImageUploadProps) => {
                     <div className="relative h-40 w-40">    
                         <Image
                         className="rounded-lg object-cover" 
-                        src=""
+                        src={value || "/placeholder.svg"}
                         fill
-                        alt="" />
+                        alt="Upload" />
                     </div>
                 </div>
             </CldUploadButton>
