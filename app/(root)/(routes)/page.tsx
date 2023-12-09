@@ -4,8 +4,17 @@ import SearchInput from "@/components/search-input";
 import prismadb from "@/lib/prismadb";
 import { UserButton } from "@clerk/nextjs";
 
-const RootPage = async () => {
+interface RootPageProps {
+    searchParams: {
+        categoryId: string;
+        name: String;
+    }
+}
 
+
+const RootPage = async ({searchParams} : RootPageProps) => {
+
+    
     const category = await prismadb.category.findMany()
 
     return ( 
