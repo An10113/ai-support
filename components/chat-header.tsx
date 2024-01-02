@@ -39,18 +39,17 @@ export const ChatHeader = ({ companion }: ChatHeaderProps) => {
       await axios.delete(`/api/companion/${companion.id}`);
       toast({
         description: "Success."
-      })
-
-      router.refresh()
-      router.push("/")
+      });
+      router.refresh();
+      router.push("/");
     } catch (error) {
       toast({
-        description: "Something went wrong.",
         variant: "destructive",
-      });
+        description: "Something went wrong."
+      })
     }
-  };
-
+  }
+  
   return (
     <div className="flex w-full justify-between items-center border-b border-primary/10 pb-4">
       <div className="flex gap-x-2 items-center">
@@ -79,15 +78,14 @@ export const ChatHeader = ({ companion }: ChatHeaderProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push(`/companion/${companion.id}`)}>
               <Edit
-                onClick={() => router.push(`/companion/${companion.id}`)}
                 className="w-4 h-4 mr-2"
               />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Trash onClick={onDelete} className="w-4 h-4 mr-2" />
+            <DropdownMenuItem onClick={onDelete}>
+              <Trash className="w-4 h-4 mr-2" />
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -5,12 +5,13 @@ import prismadb from "@/lib/prismadb";
 import exp from "constants";
 
 export async function PATCH( req:Request,{params}:{params: {companionId:string}}) {
-    try{
+
+  try{
         const body = await req.json();
         const user = await currentUser();
         const { src, name, description, instructions, seed, categoryId } = body;
         
-        if(params.companionId){
+        if(!params.companionId){
             return new NextResponse("CompanionID is required",{status : 400})
         }
 
@@ -22,7 +23,11 @@ export async function PATCH( req:Request,{params}:{params: {companionId:string}}
           return new NextResponse("Missing required fields", { status: 400 });
         };
 
-        const companion = await prismadb.companion.create({
+        const companion = await prismadb.companion.update({
+          where: {
+            userId: user.id,
+            id: params.companionId
+          },
             data:{
                 src, name, description, seed, instructions, categoryId, userId: user.id, userName: user.firstName,  
             }
@@ -37,25 +42,26 @@ export async function PATCH( req:Request,{params}:{params: {companionId:string}}
 }
 
 export async function DELETE(
-    request:Request,
-    {params}:{params: {companionId:string}}
-){
-    try{
-        const { userId } = auth()
-
-        if(!userId){
-            return new NextResponse("Unauthorized", {status: 401})
+    request: Request,
+    { params }: { params: { companionId: string } }
+  ) {
+    try {
+      const { userId } = auth();
+  
+      if (!userId) {
+        return new NextResponse("Unauthorized", { status: 401 });
+      }
+  
+      const companion = await prismadb.companion.delete({
+        where: {
+          userId,
+          id: params.companionId
         }
-
-        const companion = await prismadb.companion.delete({
-            where:{
-                userId,
-                id: params.companionId
-            }
-        })
+      });
+  
+      return NextResponse.json(companion);
+    } catch (error) {
+      console.log("[COMPANION_DELETE]", error);
+      return new NextResponse("Internal Error", { status: 500 });
     }
-    catch(error){
-        console.log("[COMPANION_DELETE]", error);
-        return new NextResponse("Internal Error", {status: 500})
-    }
-}
+  };
