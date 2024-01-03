@@ -7,6 +7,7 @@ import { ChatHeader } from "@/components/chat-header";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { ChatForm } from "@/components/chat-form";
+import { ChatMessages } from "@/components/chat-messages";
 
 interface ChatClientProps {
   companion: Companion & {
@@ -51,7 +52,11 @@ export const ChatClient = ({ companion }: ChatClientProps) => {
     <div className="flex flex-col h-full p-4 space-y-2">
       <ChatHeader companion={companion} />
       <div>
-
+        <ChatMessages 
+        companion={companion}
+        isLoading={isLoading}
+        message={message}
+        />
       </div>
       <ChatForm 
       isLoading={isLoading}
